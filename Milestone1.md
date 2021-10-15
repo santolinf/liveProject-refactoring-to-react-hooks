@@ -6,7 +6,7 @@ All new React components are function components.
 The new `Select` component was created by copying the elements built inside
 the existing `buildSelect()` function of `DashboardShell.js`.
 
-The new React component makes an HTML select highly reusable by other components by
+The new React component makes an HTML select highly reusable to other components by
 parameterizing the _id_ and _label_ so that multiple selects can appear on the same
 rendered page, and parameterizing the _options_ and _onChange_ listener so that menu option values
 can be passed externally.
@@ -63,5 +63,5 @@ updates its local state with the new endpoint, and that in turn renders the list
 of data that gets fetched by the `DataFetch` component.
 
 When in _development_ mode a mock API is used to fetch the data from the dataset 
-that are generated from a local resource file (`mocks\index.js`). The mock API is
+that are generated from a local resource file (`mocks/index.js`). The mock API is
 implemented by [Mirage JS](https://miragejs.com/).
