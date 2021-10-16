@@ -1,34 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { useDataFetch } from '../hooks';
+import Loading from './Loading';
 
 export default function DataFetch ({ endpoint }) {
 
-  const [dataset, setDataset] = useState([]),
-    [errorMessage, setErrorMessage] = useState(undefined);
-
-  useEffect(() => {
-    fetch(endpoint)
-      .then(data => data.json())
-      .then(json => {
-        setErrorMessage(undefined);
-        setDataset(json);
-      })
-      .catch(error => {
-        setDataset([]);
-        setErrorMessage(error.message);
-      });
-  }, [endpoint]);
+  const { loading, success, error, data } = useDataFetch(endpoint);
 
   return (
     <>
-      { dataset.length > 0 &&
+      { success &&
       <ul>
-        { dataset.map(d => <li key={d.timestamp}>{d.timestamp + ' - ' + d.amount}</li>) }
+        { data.map(d => <li key={d.timestamp}>{d.timestamp + ' - ' + d.amount}</li>) }
       </ul>
       }
-      { errorMessage &&
-        <p>{errorMessage}</p>
+      { error &&
+        <p>{error}</p>
       }
+      { loading && <div><Loading /></div> }
     </>
   );
 }

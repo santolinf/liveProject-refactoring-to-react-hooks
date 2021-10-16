@@ -10,6 +10,11 @@ if (process.env.NODE_ENV === 'development') {
     routes() {
       this.namespace = process.env.REACT_APP_BASE_URL;
 
+      let developmentTiming = parseInt(process.env.REACT_APP_API_RESPONSE_DELAY);
+      if (developmentTiming > 0) {
+        this.timing = developmentTiming;
+      }
+
       this.get('/sales/', () => sales);
 
       this.get('/subscriptions/', () => subscriptions);
