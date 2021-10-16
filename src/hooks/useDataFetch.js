@@ -39,10 +39,20 @@ export function useDataFetch(url) {
   const [state, dispatch] = useReducer(dataFetchReducer, false, initialDataFetchState);
 
   useEffect(() => {
+    if (!url) {
+      // do not call fetch when url is null or empty
+      return;
+    }
+
     dispatch({type: 'LOADING'});
 
     fetch(url)
-      .then(data => data.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
       .then(json => dispatch({type: 'SUCCESS', payload: json}))
       .catch(error => dispatch({type: 'ERROR', payload: error.message}))
   }, [url]);
