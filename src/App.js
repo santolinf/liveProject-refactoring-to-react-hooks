@@ -1,12 +1,13 @@
 import React from "react";
-// import DashboardShell from "./features/Dashboard/DashboardShell";
-import SelectDataFetch from './common/components/SelectDataFetch';
+import { initialAppContext as initialValue, AppContext } from './context/AppContext';
+import DashboardShell from "./features/Dashboard/DashboardShell";
 
 const App = () => {
-  return <>
-    {/*<DashboardShell />*/}
-      <SelectDataFetch />
-    </>;
+  return (
+    <AppContext.Provider value={initialValue}>
+      <DashboardShell />
+    </AppContext.Provider>
+  );
 };
 
 export default App;
