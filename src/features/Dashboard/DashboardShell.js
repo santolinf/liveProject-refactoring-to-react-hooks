@@ -10,39 +10,33 @@ export default function DashboardShell () {
 
   const [selectedLabel, setSelectedLabel] = useState("");
 
-  // componentDidMount() {
+  // componentDidMount() {  // TODO refactor in the next milestone
   //   this.props.fetchDataset(`${process.env.REACT_APP_BASE_URL}/totals/`);
   // }
-  //
-  // handleSelectChange(event) {
-  //   const selectedLabel = event.target.selectedOptions[0].label;
-  //   this.props.fetchDataset(event.target.value);
-  //   this.setState({ selectedLabel });
-  // }
 
-  function buildSelect() {
-    const optionsForSelect = [
-      { label: "Sales", value: `${process.env.REACT_APP_BASE_URL}/sales/` },
-      {
-        label: "Subscriptions",
-        value: `${process.env.REACT_APP_BASE_URL}/subscriptions/`
-      }
-    ];
-
-    return (
-      <Select id="select-chart"
-              label="Please, select a chart"
-              options={optionsForSelect}
-              onChange={evt => console.dir(evt.target.value)}
-      />
-    );
+  function handleSelectChange(event) {
+    const selectedLabel = event.target.selectedOptions[0].label;
+    setSelectedLabel(selectedLabel);
+    // this.props.fetchDataset(event.target.value); // TODO refactor in the next milestone
   }
+
+  const optionsForSelect = [
+    { label: "Sales", value: `${process.env.REACT_APP_BASE_URL}/sales/` },
+    {
+      label: "Subscriptions",
+      value: `${process.env.REACT_APP_BASE_URL}/subscriptions/`
+    }
+  ];
 
   return (
     <Layout>
       <Aside>
         <h2># Polly dashboard</h2>
-        {buildSelect()}
+        <Select id="select-chart"
+                label="Please, select a chart"
+                options={optionsForSelect}
+                onChange={handleSelectChange}
+        />
       </Aside>
       <Main>
         <h1>
