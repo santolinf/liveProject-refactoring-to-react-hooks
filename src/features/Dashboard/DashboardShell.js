@@ -6,43 +6,35 @@ import Main from "../../common/components/Main";
 import SummaryContainer from "./SummaryContainer";
 import Select from '../../common/components/Select';
 
-export default function DashboardShell () {
+export default function DashboardShell ({ setEndpoint }) {
 
-  const [selectedLabel, setSelectedLabel] = useState("");
+  const [selectedLabel, setSelectedLabel] = useState('');
 
-  // componentDidMount() {
-  //   this.props.fetchDataset(`${process.env.REACT_APP_BASE_URL}/totals/`);
-  // }
-  //
-  // handleSelectChange(event) {
-  //   const selectedLabel = event.target.selectedOptions[0].label;
-  //   this.props.fetchDataset(event.target.value);
-  //   this.setState({ selectedLabel });
-  // }
+  function handleSelectChange(event) {
+    const selectedLabel = event.target.selectedOptions[0].label;
+    setSelectedLabel(selectedLabel);
 
-  function buildSelect() {
-    const optionsForSelect = [
-      { label: "Sales", value: `${process.env.REACT_APP_BASE_URL}/sales/` },
-      {
-        label: "Subscriptions",
-        value: `${process.env.REACT_APP_BASE_URL}/subscriptions/`
-      }
-    ];
-
-    return (
-      <Select id="select-chart"
-              label="Please, select a chart"
-              options={optionsForSelect}
-              onChange={evt => console.dir(evt.target.value)}
-      />
-    );
+    const endpoint = event.target.selectedOptions[0].value;
+    setEndpoint(endpoint);
   }
+
+  const optionsForSelect = [
+    { label: "Sales", value: `${process.env.REACT_APP_BASE_URL}/sales/` },
+    {
+      label: "Subscriptions",
+      value: `${process.env.REACT_APP_BASE_URL}/subscriptions/`
+    }
+  ];
 
   return (
     <Layout>
       <Aside>
         <h2># Polly dashboard</h2>
-        {buildSelect()}
+        <Select id="select-chart"
+                label="Please, select a chart"
+                options={optionsForSelect}
+                onChange={handleSelectChange}
+        />
       </Aside>
       <Main>
         <h1>

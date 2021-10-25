@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
-import { AppContext } from '../../context/AppContext';
+import React from "react";
+import { useDataFetch } from '../../hooks';
 
 export default function SummaryContainer () {
 
-  const { salesTotal, subscriptionsTotal } = useContext(AppContext);
+  const { data } = useDataFetch(`${process.env.REACT_APP_BASE_URL}/totals/`),
+    { salesTotal, subscriptionsTotal } = data;
 
   return (
     <div className="summary flex flex-row">
