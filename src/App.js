@@ -1,13 +1,16 @@
-import React from "react";
-import { initialAppContext as initialValue, AppContext } from './context/AppContext';
+import React, { useState } from "react";
+import { AppContext } from './context/AppContext';
+import { useDataFetch } from './hooks';
 import DashboardShell from "./features/Dashboard/DashboardShell";
 
-const App = () => {
+export default function App () {
+
+  const [endpoint, setEndpoint] = useState(null),
+    datasetResult = useDataFetch(endpoint);
+
   return (
-    <AppContext.Provider value={initialValue}>
-      <DashboardShell />
+    <AppContext.Provider value={datasetResult}>
+      <DashboardShell setEndpoint={setEndpoint} />
     </AppContext.Provider>
   );
 };
-
-export default App;

@@ -6,18 +6,16 @@ import Main from "../../common/components/Main";
 import SummaryContainer from "./SummaryContainer";
 import Select from '../../common/components/Select';
 
-export default function DashboardShell () {
+export default function DashboardShell ({ setEndpoint }) {
 
-  const [selectedLabel, setSelectedLabel] = useState("");
-
-  // componentDidMount() {  // TODO refactor in the next milestone
-  //   this.props.fetchDataset(`${process.env.REACT_APP_BASE_URL}/totals/`);
-  // }
+  const [selectedLabel, setSelectedLabel] = useState('');
 
   function handleSelectChange(event) {
     const selectedLabel = event.target.selectedOptions[0].label;
     setSelectedLabel(selectedLabel);
-    // this.props.fetchDataset(event.target.value); // TODO refactor in the next milestone
+
+    const endpoint = event.target.selectedOptions[0].value;
+    setEndpoint(endpoint);
   }
 
   const optionsForSelect = [
