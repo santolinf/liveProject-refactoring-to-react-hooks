@@ -11,7 +11,7 @@ export default function DashboardShell ({ setEndpoint }) {
   const [selectedLabel, setSelectedLabel] = useState('');
 
   function handleSelectChange(event) {
-    const selectedLabel = event.target.selectedOptions[0].label;
+    const selectedLabel = event.target.selectedOptions[0].text;
     setSelectedLabel(selectedLabel);
 
     const endpoint = event.target.selectedOptions[0].value;
